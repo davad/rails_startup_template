@@ -49,6 +49,7 @@ gem_group :production do
   gem "rails_12factor"
 end
 
+run "bundle install"
 
 # Setting up foreman to deal with environment variables and services
 # https://github.com/ddollar/foreman
@@ -132,23 +133,3 @@ doc/
 .secret
 .DS_Store
 EOF"
-
-
-# Git: Initialize
-# ==================================================
-git :init
-git add: "."
-git commit: %Q{ -m 'Initial commit' }
-
-if yes?("Initialize GitHub repository?")
-  git_uri = `git config remote.origin.url`.strip
-  unless git_uri.size == 0
-    say "Repository already exists:"
-    say "#{git_uri}"
-  else
-    username = ask "What is your GitHub username?"
-    run "curl -u #{username} -d '{\"name\":\"#{app_name}\"}' https://api.github.com/user/repos"
-    git remote: %Q{ add origin git@github.com:#{username}/#{app_name}.git }
-    git push: %Q{ origin master }
-  end
-end
