@@ -108,7 +108,7 @@ end
 # ==================================================
 if yes?("Download font-awesome?")
   run "wget http://fontawesome.io/assets/font-awesome-4.1.0.zip -O font-awesome.zip"
-  run "unzip font-awesome.zip && rm font-awesome.zip && mv font-awesome-4.0.3 font-awesome"
+  run "unzip font-awesome.zip && rm font-awesome.zip && mv font-awesome-4.1.0 font-awesome"
   run "cp font-awesome/css/font-awesome.css vendor/assets/stylesheets/"
   run "cp -r font-awesome/fonts public/fonts"
   run "rm -rf font-awesome"
